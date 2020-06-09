@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content  %}
+    
+    <div class="container" id="formContainer">
+        <h4> Consulta tu tasa</h4>
+        <hr>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="idMonto">Monto</label>
+                <input type="number" class="form-control" step="0.01" id="idMonto" name="Monto" required>
+                <small id="montoHelp" class="form-text text-muted">Ingrese el monto en UF.</small>
+            </div>
+            <div class="form-group">
+                <label for="idPlazo">Plazo</label>
+                <input type="number" class="form-control" id="idPlazo" name="Plazo" required >
+                <small id="PlazoHelp" class="form-text text-muted">El plazo debe ser ingresado en dias.</small>
+            </div>
+            <div class="form-group">
+                <label for="idFechaTMC">Fecha TMC</label>
+                <input type="date" class="form-control" id="idFechaTMC" name="FechaTMC" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-md btn-block">Consultar</button>
+        </form>
+    </div>
+    {% if data %}
+        <div class="container" id="formContainer">
+            <h4>Resultados</h4>
+            <hr>
+            <ul>
+                <li>Monto:  <b>{{ monto }}</b> UF</li>
+                <li>Plazo:  <b>{{ plazo }}</b> D&iacute;as</li>
+                <li>Fecha:  <b>{{ fecha }}</b></li>
+            </ul>
+            <span>Tasa M&aacute;xima Convencional:  <b>{{ data.Valor }}</b></span>
+        </div>
+    {% endif %}
+{% endblock  %}
